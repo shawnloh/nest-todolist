@@ -7,7 +7,7 @@ import { ConfigService } from '@nestjs/config';
 import { WinstonModule } from 'nest-winston';
 import { loggerTransportsConfig } from './config/logger.config';
 import * as exphbs from 'express-handlebars';
-import { join, resolve } from 'path';
+import { resolve } from 'path';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {

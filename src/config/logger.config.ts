@@ -11,6 +11,7 @@ export const loggerTransportsConfig = [
     level: 'info',
     maxSize: '5mb',
     json: true,
+    zippedArchive: true,
     handleExceptions: true,
     format: winston.format.combine(
       winston.format.timestamp(),
@@ -25,6 +26,7 @@ export const loggerTransportsConfig = [
     maxSize: '5mb',
     json: true,
     handleExceptions: true,
+    zippedArchive: true,
     dirname: path.resolve(__dirname, '..', '..', 'logs', 'errors'),
     level: 'error',
     format: winston.format.combine(
