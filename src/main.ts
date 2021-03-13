@@ -37,7 +37,7 @@ async function bootstrap() {
     }),
   );
 
-  const viewsPath = resolve(__dirname, '..', 'public', 'views');
+  const viewsPath = resolve(__dirname, '..', 'views');
 
   app.setBaseViewsDir(viewsPath);
   app.engine(
