@@ -1,10 +1,10 @@
 const { randomBytes } = require('crypto');
-import { EOL } from 'os';
-import path from 'path';
-import fs from 'fs';
-import dotenv from 'dotenv';
-import yargs from 'yargs';
-import { hideBin } from 'yargs/helpers';
+const { EOL } = require('os');
+const path =  require('path');
+const fs =  require('fs');
+const dotenv =  require('dotenv');
+const yargs =  require('yargs');
+const { hideBin } =  require('yargs/helpers');
 
 function readConfig() {
   try {
