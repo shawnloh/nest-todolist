@@ -52,6 +52,7 @@ function bootstrap() {
   });
 
   writeToFile(config);
+  console.log('Generated token for', args.key)
 }
 
 bootstrap();
