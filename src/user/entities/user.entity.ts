@@ -7,11 +7,14 @@ import {
   DeleteDateColumn,
   Entity,
   Index,
+  JoinTable,
+  ManyToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { v4 as uuid } from 'uuid';
 import * as bcrypt from 'bcrypt';
+import { Role } from './role.entity';
 
 @Entity('users')
 export class User extends BaseEntity {
@@ -21,7 +24,7 @@ export class User extends BaseEntity {
 
   @Column({ type: 'varchar', unique: true, nullable: false })
   @Index({ unique: true })
-  pid: string;
+  oid: string;
 
   @Column({ type: 'varchar', length: 100, nullable: false })
   name: string;
@@ -41,6 +44,10 @@ export class User extends BaseEntity {
   @Column({ type: 'varchar', nullable: false })
   salt: string;
 
+  @ManyToMany(() => Role, { eager: true, cascade: true })
+  @JoinTable({ name: 'user_roles_id' })
+  roles: Role[];
+
   @Exclude()
   @CreateDateColumn({ type: 'timestamp' })
   created_at: Date;
@@ -54,8 +61,8 @@ export class User extends BaseEntity {
   deleted_at: Date;
 
   @BeforeInsert()
-  private generatePid(): void {
-    this.pid = uuid();
+  private generateOid(): void {
+    this.oid = uuid();
   }
 
   @BeforeInsert()

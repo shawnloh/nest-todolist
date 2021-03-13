@@ -20,7 +20,8 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "generate:token": "node generateRandomKey",
-    "typeorm": "./node_modules/.bin/typeorm"
+    "typeorm": "typeorm",
+    "migration:create": "typeorm migration:create -n"
   },
   "dependencies": {
     "@nestjs/common": "^7.6.13",

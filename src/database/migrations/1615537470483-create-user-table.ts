@@ -14,7 +14,7 @@ export class createUserTable1615537470483 implements MigrationInterface {
             isGenerated: true,
           },
           {
-            name: 'pid',
+            name: 'oid',
             type: 'varchar',
             isUnique: true,
           },
@@ -69,8 +69,8 @@ export class createUserTable1615537470483 implements MigrationInterface {
     await queryRunner.createIndex(
       'users',
       new TableIndex({
-        name: 'IDX_USER_PID',
-        columnNames: ['pid'],
+        name: 'IDX_USER_OID',
+        columnNames: ['oid'],
       }),
     );
   }

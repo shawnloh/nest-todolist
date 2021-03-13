@@ -18,13 +18,13 @@ export class UserService {
     return this.userRepository.createUser(createUserDto);
   }
 
-  async findOne(pid: string): Promise<User> {
-    this.logger.log(`retrieving user with pid: ${pid}`);
-    return this.userRepository.findOne({ pid });
+  async findOne(oid: string): Promise<User> {
+    this.logger.log(`retrieving user with oid: ${oid}`);
+    return this.userRepository.findOne({ oid });
   }
 
-  async remove(pid: string): Promise<User> {
-    this.logger.log(`removing user with pid:${pid}`);
-    return this.userRepository.softRemove({ pid });
+  async remove(oid: string): Promise<User> {
+    this.logger.log(`removing user with oid:${oid}`);
+    return this.userRepository.softRemove({ oid });
   }
 }
