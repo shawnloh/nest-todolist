@@ -9,6 +9,8 @@ module.exports = {
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
   migrationsTableName: 'db_migrations',
+  logging: process.env.DB_LOG || true,
+  logger: process.env.DB_LOG_TYPE || 'advanced-console',
   migrations: ['dist/database/migrations/*{.js,.ts}'],
   cli: {
     migrationsDir: 'src/database/migrations',

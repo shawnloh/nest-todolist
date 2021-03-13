@@ -1,7 +1,6 @@
 import {
   CallHandler,
   ExecutionContext,
-  Inject,
   Injectable,
   Logger,
   NestInterceptor,
@@ -11,8 +10,8 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 @Injectable()
-export class LoggingInterceptor implements NestInterceptor {
-  private logger = new Logger(LoggingInterceptor.name);
+export class RequestLoggingInterceptor implements NestInterceptor {
+  private logger = new Logger(RequestLoggingInterceptor.name);
 
   intercept(
     context: ExecutionContext,
@@ -20,7 +19,7 @@ export class LoggingInterceptor implements NestInterceptor {
   ): Observable<any> | Promise<Observable<any>> {
     const ctx = context.switchToHttp();
     const req = ctx.getRequest<Request>();
-    const { originalUrl, method, params, query, body } = req;
+    const { originalUrl, method, ip } = req;
 
     const reqNow = Date.now();
 
@@ -28,9 +27,9 @@ export class LoggingInterceptor implements NestInterceptor {
       tap(() => {
         const resNow = Date.now();
         this.logger.log(
-          `Path: ${originalUrl} method: ${method} - Respond Time: ${
+          `IP: ${ip} Path: ${originalUrl} method: ${method} - Respond Time: ${
             resNow - reqNow
-          }ms `,
+          }ms`,
         );
       }),
     );

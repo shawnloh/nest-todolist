@@ -11,9 +11,10 @@ export class createUserTable1615537470483 implements MigrationInterface {
             type: 'int',
             isPrimary: true,
             generationStrategy: 'increment',
+            isGenerated: true,
           },
           {
-            name: 'pid',
+            name: 'oid',
             type: 'varchar',
             isUnique: true,
           },
@@ -27,10 +28,22 @@ export class createUserTable1615537470483 implements MigrationInterface {
             name: 'email',
             type: 'varchar',
             isNullable: false,
+            isUnique: true,
             length: '150',
           },
           {
+            name: 'phone',
+            type: 'int',
+            length: '30',
+            isNullable: false,
+          },
+          {
             name: 'password',
+            type: 'varchar',
+            isNullable: false,
+          },
+          {
+            name: 'salt',
             type: 'varchar',
             isNullable: false,
           },
@@ -42,10 +55,12 @@ export class createUserTable1615537470483 implements MigrationInterface {
           {
             name: 'updated_at',
             type: 'timestamp',
+            isNullable: true,
           },
           {
             name: 'deleted_at',
             type: 'timestamp',
+            isNullable: true,
           },
         ],
       }),
@@ -54,8 +69,8 @@ export class createUserTable1615537470483 implements MigrationInterface {
     await queryRunner.createIndex(
       'users',
       new TableIndex({
-        name: 'IDX_USER_PID',
-        columnNames: ['pid'],
+        name: 'IDX_USER_OID',
+        columnNames: ['oid'],
       }),
     );
   }
