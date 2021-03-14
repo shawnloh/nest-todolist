@@ -1,8 +1,9 @@
+import { utilities } from 'nest-winston';
 import * as path from 'path';
 import * as winston from 'winston';
 import * as winstonDailyRotateFile from 'winston-daily-rotate-file';
 
-export const loggerTransportsConfig = [
+export const loggerTransportsConfig = () => [
   new winstonDailyRotateFile({
     filename: '%DATE%-access.log',
     datePattern: 'YYYY-MM-DD',
@@ -36,13 +37,12 @@ export const loggerTransportsConfig = [
     ),
   }),
   new winston.transports.Console({
-    level: 'debug',
+    level: process.env.NODE_ENV === 'development' ? 'debug' : 'info',
     handleExceptions: true,
     format: winston.format.combine(
       winston.format.timestamp(),
       winston.format.colorize(),
-      winston.format.prettyPrint(),
-      winston.format.simple(),
+      utilities.format.nestLike(),
     ),
   }),
 ];
