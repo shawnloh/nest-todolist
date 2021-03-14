@@ -14,7 +14,4 @@ export class Role extends BaseEntity {
 
   @Column()
   name: string;
-
-  @ManyToMany(() => User)
-  users: User[];
 }

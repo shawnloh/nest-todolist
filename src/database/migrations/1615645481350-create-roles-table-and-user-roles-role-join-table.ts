@@ -34,52 +34,37 @@ export class createRolesTableAndUserRolesRoleJoinTable1615645481350
         name: 'user_roles_role',
         columns: [
           {
-            name: 'id',
-            type: 'int',
-            isPrimary: true,
-            isGenerated: true,
-            generationStrategy: 'increment',
-          },
-          {
             name: 'userId',
             type: 'int',
+            isPrimary: true,
           },
           {
             name: 'roleId',
             type: 'int',
+            isPrimary: true,
           },
         ],
       }),
     );
-
-    await queryRunner.createForeignKeys('user_roles_role', [
+    await queryRunner.createForeignKey(
+      'user_roles_role',
       new TableForeignKey({
         columnNames: ['userId'],
         referencedColumnNames: ['id'],
-        referencedTableName: 'roles',
+        referencedTableName: 'users',
       }),
+    );
+    await queryRunner.createForeignKey(
+      'user_roles_role',
       new TableForeignKey({
         columnNames: ['roleId'],
         referencedColumnNames: ['id'],
-        referencedTableName: 'users',
+        referencedTableName: 'roles',
       }),
-    ]);
+    );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKeys('user_roles_role', [
-      new TableForeignKey({
-        columnNames: ['userId'],
-        referencedColumnNames: ['id'],
-        referencedTableName: 'roles',
-      }),
-      new TableForeignKey({
-        columnNames: ['roleId'],
-        referencedColumnNames: ['id'],
-        referencedTableName: 'users',
-      }),
-    ]);
-
     await queryRunner.dropTable('user_roles_role');
     await queryRunner.dropTable('roles');
   }

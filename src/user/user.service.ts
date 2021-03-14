@@ -18,6 +18,11 @@ export class UserService {
     return this.userRepository.createUser(createUserDto);
   }
 
+  async findByEmail(email: string): Promise<User> {
+    this.logger.log(`retrieving user`);
+    return this.userRepository.findOne({ email });
+  }
+
   async findOne(oid: string): Promise<User> {
     this.logger.log(`retrieving user with oid: ${oid}`);
     return this.userRepository.findOne({ oid });

@@ -45,7 +45,17 @@ export class User extends BaseEntity {
   salt: string;
 
   @ManyToMany(() => Role, { eager: true, cascade: true })
-  @JoinTable({ name: 'user_roles_id' })
+  @JoinTable({
+    name: 'user_roles_role',
+    joinColumn: {
+      name: 'userId',
+      referencedColumnName: 'id',
+    },
+    inverseJoinColumn: {
+      name: 'roleId',
+      referencedColumnName: 'id',
+    },
+  })
   roles: Role[];
 
   @Exclude()
